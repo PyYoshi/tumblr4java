@@ -1,5 +1,8 @@
-﻿.idea/*
 target/*
-out/
+.classpath
+.project
+.settings
+*.iml
 *.jar
 *.class
+.idea/*

@@ -1,6 +1,0 @@
-required
-    commons-codec-1.5.jar: http://commons.apache.org/codec/
-    junit-4.10.jar: http://www.junit.org/
-    signpost-core-1.2.1.1.jar: http://code.google.com/p/oauth-signpost/
-    jackson-core-asl-1.9.2.jar: http://jackson.codehaus.org/
-    jackson-mapper-asl-1.9.2.jar: http://jackson.codehaus.org/
