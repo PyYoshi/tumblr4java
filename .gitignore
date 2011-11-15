@@ -1,4 +1,4 @@
-﻿.idea/*.*
+﻿.idea/
 target/
 out/
 *.jar
