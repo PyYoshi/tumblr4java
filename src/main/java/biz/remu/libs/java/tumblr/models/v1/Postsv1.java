@@ -2,7 +2,6 @@ package biz.remu.libs.java.tumblr.models.v1;
 
 import biz.remu.libs.java.tumblr.models.ParseModel;
 import biz.remu.libs.java.tumblr.models.v1.rmodels.Tumblelog;
-import biz.remu.libs.java.tumblr.models.v1.rmodels.Posts;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonToken;
 
@@ -19,7 +18,6 @@ public class Postsv1 implements ParseModel{
         String elementName = null;
         Map<String,Object> result = new HashMap<String,Object>();
         Tumblelog tumblelog = new Tumblelog();
-        List posts = new ArrayList();
         try {
             while (jsonParser.nextToken() != JsonToken.END_ARRAY){
                 if(jsonParser.getCurrentToken() == JsonToken.START_OBJECT){
@@ -57,24 +55,60 @@ public class Postsv1 implements ParseModel{
                               while (jsonParser.getText() != "}"){
                                   jsonParser.nextToken();
                                   elementName = jsonParser.getCurrentName();
-                                  if(jsonParser.getText() != "{" || jsonParser.getText() != "}" ||
-                                          jsonParser.getText() != "[" || jsonParser.getText() != "]"){
-
-                                      tumblelog.setVal(elementName,jsonParser.getText());
-
+                                  if(jsonParser.getText() != elementName){
+                                      if(jsonParser.getText() != "{" || jsonParser.getText() != "}" || jsonParser.getText() != "[" || jsonParser.getText() != "]"){
+                                          tumblelog.setVal(elementName,jsonParser.getText());
+                                      }
                                   }
                               }
                           }else if("posts-start".equals(name)){
                               result.put(name,Integer.valueOf(jsonParser.getText()));
-
                           }else if("posts-total".equals(name)){
                               result.put(name,Integer.valueOf(jsonParser.getText()));
                           }else if("posts-type".equals(name)){
                               result.put(name,Boolean.valueOf(jsonParser.getText()));
                           }else if("posts".equals(name)){
-                              System.out.println("posts");
-                              //jsonParser.nextToken();// [
-                              System.out.println(jsonParser.getText());// {
+                              jsonParser.nextToken();// [
+                              Map<String,Object> post = new HashMap<String,Object>();
+                              String postType = null;
+                              while (jsonParser.getText() != "]"){
+
+                                  jsonParser.nextToken();
+                                  elementName = jsonParser.getCurrentName();
+
+                                  if(elementName == "type"){
+                                          postType = jsonParser.getText();
+                                  }
+
+                                  if(jsonParser.getText() != elementName){
+                                      if(jsonParser.getText() == "{"){
+                                          post = new HashMap<String,Object>();
+                                      }else if(jsonParser.getText() == "}"){
+                                          if(postType == "regular"){
+
+                                          }else if(postType == "link"){
+
+                                          }else if(postType == "quote"){
+
+                                          }else if(postType == "photo"){
+
+                                          }else if(postType == "conversation"){
+
+                                          }else if(postType == "video"){
+
+                                          }else if(postType == "audio"){
+
+                                          }
+
+                                      }else{
+                                          post.put(elementName,jsonParser.getText());
+                                      }
+                                      //System.out.println("elementName: "+elementName);
+                                      //System.out.println("jsonParser.getText(): "+jsonParser.getText());
+                                  }
+                                  System.out.println();
+                              }
+                              //System.out.println(jsonParser.getText());// {
                               // TODO: "{", "}"の中身を配列にプッシュしposts.parseをしていく
                               /*
     [

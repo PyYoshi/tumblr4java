@@ -1,6 +1,5 @@
 import biz.remu.libs.java.tumblr.models.ParseModel;
 import biz.remu.libs.java.tumblr.models.v1.Postsv1;
-import biz.remu.libs.java.tumblr.models.v1.rmodels.Posts;
 import biz.remu.libs.java.tumblr.models.v1.rmodels.Tumblelog;
 import biz.remu.libs.java.tumblr.serializers.JsonSerializer;
 
@@ -50,7 +49,7 @@ public class test {
             //APIv2Handler apiv2 = new APIv2Handler();
         }*/
         try{
-            FileReader f = new FileReader("/home/renax/IdeaProjects/tumblr4java/src/main/java/testUserPost.json");
+            FileReader f = new FileReader("E:\\MySourcecode\\workspace\\tumblr4java\\src\\main\\java\\testUserPost.json");
             BufferedReader b = new BufferedReader(f);
             String json_string = b.readLine();
             JsonSerializer json = new JsonSerializer(json_string);
@@ -61,7 +60,7 @@ public class test {
             Integer posts_start = (Integer) obj.get("posts-start");
             Integer posts_total = (Integer) obj.get("posts-total");
             Boolean posts_type = (Boolean) obj.get("posts-type");
-            Posts posts = (Posts) obj.get("posts");
+
             obj = null;// GC
 
             System.out.println("============================");
