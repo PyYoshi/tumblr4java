@@ -1,6 +1,9 @@
 package biz.remu.libs.java.tumblr.models;
 
+import org.codehaus.jackson.JsonParser;
+
+
 public interface ParseModel {
-    public void parse();
-    public void parse_list();
+    public Object parse(JsonParser jsonParser);
+
 }

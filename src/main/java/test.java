@@ -1,7 +1,12 @@
+import biz.remu.libs.java.tumblr.models.ParseModel;
+import biz.remu.libs.java.tumblr.models.v1.Postsv1;
+import biz.remu.libs.java.tumblr.models.v1.rmodels.Posts;
+import biz.remu.libs.java.tumblr.models.v1.rmodels.Tumblelog;
 import biz.remu.libs.java.tumblr.serializers.JsonSerializer;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Map;
 
 public class test {
 
@@ -49,10 +54,29 @@ public class test {
             BufferedReader b = new BufferedReader(f);
             String json_string = b.readLine();
             JsonSerializer json = new JsonSerializer(json_string);
-            json.serialize();
+            ParseModel parseModel = new Postsv1();
+
+            Map<String,Object> obj = json.serialize(parseModel);
+            Tumblelog tumblelog = (Tumblelog) obj.get("tumblelog");
+            Integer posts_start = (Integer) obj.get("posts-start");
+            Integer posts_total = (Integer) obj.get("posts-total");
+            Boolean posts_type = (Boolean) obj.get("posts-type");
+            Posts posts = (Posts) obj.get("posts");
+            obj = null;// GC
+
+            System.out.println("============================");
+            System.out.println(tumblelog);
+            System.out.println(posts_start);
+            System.out.println(posts_total);
+            System.out.println(posts_type);
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
 
         }catch(Exception e){
             System.out.println("ファイル読み込み失敗");
+            e.printStackTrace();
         }
 
 

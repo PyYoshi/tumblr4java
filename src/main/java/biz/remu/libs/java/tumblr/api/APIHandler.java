@@ -124,7 +124,7 @@ public class APIHandler {
                 }
                 // res_contentをシリアライズする
                 JsonSerializer json_s = new JsonSerializer(res_content);
-                json_s.serialize();
+                //json_s.serialize();
 
             }else{
                 // xml serializerに渡す
